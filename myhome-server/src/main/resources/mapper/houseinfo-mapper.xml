@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ssafy.myhome.model.house.repo.HouseInfoRepo">
+	<select id="selectByAptCode" parameterType="biginteger" resultType="HouseInfo">
+		SELECT * 
+		FROM houseinfo 
+		WHERE aptCode= #{aptCode}
+	</select>
+	<select id="selectByDongCode" parameterType="string" resultType="HouseInfo">
+		SELECT * 
+		FROM houseinfo 
+		WHERE dongCode = #{dongCode}
+	</select>
+	
+	<!-- <resultMap type="houseInfo" id="baseHouseInfoMap">
+		<id column="aptCode" property="aptCode" />
+		<result column="aptName" property="aptName" />
+		<result column="dongCode" property="dongCode" />
+		<result column="dongName" property="dongName" />
+		<result column="buildYear" property="buildYear" />
+		<result column="jibun" property="jibun" />
+		<result column="lat" property="lat" />
+		<result column="lng" property="lng" />
+		<result column="img" property="img" />Ï
+	</resultMap> -->
+	
+	<select id="sidoStats" resultType="map">
+		SELECT * 
+		FROM statesido
+	</select>
+	
+</mapper>

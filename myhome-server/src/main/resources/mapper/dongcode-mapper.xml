@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ssafy.myhome.model.house.repo.DongCodeRepo">
+	<select id="selectByDongCode" parameterType="string" resultType="dongCode">
+		SELECT *
+		FROM dongcode
+		WHERE dongCode=#{dongCode}
+	</select>
+	
+	<select id="getSido" resultType="map">
+		SELECT ANY_VALUE(left(dongCode,2)) as sidoCode, ANY_VALUE(sidoName) as sidoName FROM dongcode group by sidoName
+	</select>
+	
+	
+	<select id="getGugunInSido" parameterType="string" resultType="map">
+		select ANY_VALUE(left(dongCode,5)) gugunCode, ANY_VALUE(gugunName) as gugunName
+		from dongCode
+		where left(dongCode,2) = #{sidoCode} and gugunName is not null
+		group by gugunName
+	</select>
+	
+	<select id="getDongInGugun" parameterType="string" resultType="map">
+		select dongcode, dongName
+		from dongCode
+		where left(dongCode,5)=#{gugunCode} and dongName is not null
+	</select>
+	
+	
+
+</mapper>
